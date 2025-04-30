@@ -15,14 +15,8 @@ def serve():
     game_engine_pb2_grpc.add_GameEngineServiceServicer_to_server(GameEngineServicer(), server)
     server.add_insecure_port("[::]:50051")
     server.start()
+    server.wait_for_termination()
     print("Server is running on port 50051...")
-    try:
-        while True:
-            time.sleep(3600)
-    except KeyboardInterrupt:
-        print("Shutting down server...")
-        server.stop(0)
-
 
 if __name__ == "__main__":
     serve()
